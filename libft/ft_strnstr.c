@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 16:06:19 by amismail          #+#    #+#             */
-/*   Updated: 2024/08/27 11:54:34 by amismail         ###   ########.fr       */
+/*   Created: 2024/08/27 16:43:15 by amismail          #+#    #+#             */
+/*   Updated: 2024/08/27 17:42:17 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*strrchr(const char *s, int c)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char	*ptr;
+	char	*comp;
+	char	*b;
 
-	ptr = (char *)s + (ft_strlen(s) - 1);
-	while (*ptr != 0)
+	comp = (char *)little;
+	while (big && len--)
 	{
-		if (*ptr == c)
-			return (ptr);
-		ptr --;
+		b = (char *)big;
+		while ((*b == *comp) && len--)
+		{
+			if (*(++comp) == '\0')
+				return ((char *)big);
+			b++;
+		}
+		comp = (char *)little;
+		big++;
 	}
 	return (NULL);
 }
-/*int main() {
-    char str[] = "hello world";
-    char c = 'o';
-    char *ptr = strrchr(str, c);
-
-    if (ptr != NULL) {
-        printf("Last occurrence of '%c' found at index %ld\n", c, ptr - str);
-    } else {
-        printf("Character '%c' not found\n", c);
-    }
-
-    return 0;
-}*/

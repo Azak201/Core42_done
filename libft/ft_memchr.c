@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 16:06:19 by amismail          #+#    #+#             */
-/*   Updated: 2024/08/27 11:54:34 by amismail         ###   ########.fr       */
+/*   Created: 2024/08/27 12:29:33 by amismail          #+#    #+#             */
+/*   Updated: 2024/08/27 12:47:59 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*strrchr(const char *s, int c)
-{
-	char	*ptr;
-
-	ptr = (char *)s + (ft_strlen(s) - 1);
-	while (*ptr != 0)
+void	*ft_memchr(const void *s, int c, size_t n)
+{	
+	while (n--)
 	{
-		if (*ptr == c)
-			return (ptr);
-		ptr --;
+		if (*(const char *)s == (char)c)
+			return ((void *)s);
+		s++;
 	}
 	return (NULL);
 }
 /*int main() {
-    char str[] = "hello world";
-    char c = 'o';
-    char *ptr = strrchr(str, c);
+    char str[] = "Hello, world!";
+    char *result;
 
-    if (ptr != NULL) {
-        printf("Last occurrence of '%c' found at index %ld\n", c, ptr - str);
-    } else {
-        printf("Character '%c' not found\n", c);
-    }
+    // Search for the first occurrence of 'o'
+    result = ft_memchr(str, ',', strlen(str));
+
+        printf("The first 'o' is at index %ld\n", result - str);
 
     return 0;
+
 }*/

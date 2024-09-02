@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 16:06:19 by amismail          #+#    #+#             */
-/*   Updated: 2024/08/27 11:54:34 by amismail         ###   ########.fr       */
+/*   Created: 2024/08/31 12:23:43 by amismail          #+#    #+#             */
+/*   Updated: 2024/08/31 12:23:49 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*strrchr(const char *s, int c)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*ptr;
+	char	*sub;
+	char	*substr;
+	char	*dup;
 
-	ptr = (char *)s + (ft_strlen(s) - 1);
-	while (*ptr != 0)
+	dup = (char *)(s + start);
+	sub = (char *)malloc(sizeof(char) * (len + 1));
+	if (!sub)
+		return (NULL);
+	substr = sub;
+	while (*dup != '\0' && len--)
 	{
-		if (*ptr == c)
-			return (ptr);
-		ptr --;
+		*sub++ = *dup++;
 	}
-	return (NULL);
+	if (*sub != '\0')
+		*++sub = '0';
+	return (substr);
 }
-/*int main() {
-    char str[] = "hello world";
-    char c = 'o';
-    char *ptr = strrchr(str, c);
+/*int main()
+{
+    char a[20] = "amjed test the loc";
+    char *b;
 
-    if (ptr != NULL) {
-        printf("Last occurrence of '%c' found at index %ld\n", c, ptr - str);
-    } else {
-        printf("Character '%c' not found\n", c);
-    }
+    b = ft_substr(a, 2, 10);
+    printf("%s \n", b);
 
     return 0;
 }*/
