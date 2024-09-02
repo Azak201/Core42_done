@@ -1,52 +1,107 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 18:12:22 by amismail          #+#    #+#             */
+/*   Updated: 2024/09/02 18:15:51 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-static countword(char *str, char del)
-{
-    int c;
-    int i;
 
-    c = 0;
-    i = 0;
-    if (!*str)
-        return (0);
-    while (str[i] != '\0')
+static int	wordnum(char *str, char del)
+{
+	char	*cp;
+	int		count;
+
+	count = 0;
+	cp = str;
+	while (*cp != '\0')
+	{
+		while (*cp == del)
+			cp++;
+		if (*cp)
+			count++;
+		while (*cp != '\0' && *cp != del)
+			cp++;
+	}
+	return (count);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**spstr;
+	int		ind;
+	int		worlen;
+
+	ind = 0;
+	spstr = (char **)malloc(sizeof(char *) * (wordnum((char *)s, c) + 1));
+	if (!s ||!spstr)
+		return (0);
+	while (*s != '\0')
+	{
+		while (*s == c && *s)
+			s++;
+		if (*s)
+		{
+			if (!ft_strchr(s, c))
+				worlen = ft_strlen(s);
+			else
+				worlen = ft_strchr(s, c) - s;
+			spstr[ind++] = ft_substr(s, 0, worlen);
+			s += worlen;
+		}
+	}
+	spstr[ind] = NULL;
+	return (spstr);
+}
+/*
+if(*s)
+its find if thier still delemeter or no
+if true (no delem left)
+all the string are the worlen
+if not (thier is delem)
+calculate the size of string from the start of delem to end
+and subract it from the orginal one to find the string len
+then sub the strin and stor it in index and move the pointer
+ to the next delem
+
+ else
+    worlen = ft_strchr(s,c) - s;
+find the first occerance and return pointer to it in calculate the
+deference between the founded element and the 0 elemnt(first elemnt)
+the founded one is the larger in index so we did put the s
+in the right side
+*/
+
+/*int main(void)
+{
+    // Example input string and delimiter
+    char str[] = "Hello,world,this,is,a,test";
+    char delimiter = ',';
+
+    // Call the ft_split function
+    char **result = ft_split(str, delimiter);
+
+    // Check if the result is not NULL
+    if (result == NULL)
     {
-        while (str[i] == c)
-            i++;
-        if (str[i] != '\0')
-            c++;
-        while (str[i] != c && str[i] != '\0')
-            i++;
+        printf("Error: Memory allocation failed or empty string\n");
+        return (1);
     }
-    return (c);
-}
 
-char **ft_split(char const *s, char c)
-{
-    char **spstr;
-    int count;
-    size_t wlen;
-
-    spstr = (char **)malloc(sizeof(char *) * (countword(s, c) + 1));
-    if (!s || !spstr)
-        return (NULL);
-    count = 0;
-    while (*s != '\0')
+    // Print the result
+    for (int i = 0; result[i] != NULL; i++)
     {
-        while (*s == c && *s)
-            s++;
-        if (*s)
-        {
-            if (!ft_strchr(s, c))
-                wlen = ft_strlen(s);
-            else
-                wlen = ft_strchr(s, c) - s;
-            spstr[count++] = ft_substr(s, 0, wlen);
-            s += wlen;
-        }
+        printf("Word %d: %s\n", i, result[i]);
+        free(result[i]); // Free each allocated substring
     }
-    spstr[count] = NULL;
-    return (spstr);
-}
-int main()
-{
-}
+
+    // Free the array of pointers
+    free(result);
+
+    return (0);
+}*/
