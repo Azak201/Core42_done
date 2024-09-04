@@ -12,7 +12,7 @@
 #include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
-{	
+{
 	while (n--)
 	{
 		if (*(const char *)s == (char)c)
