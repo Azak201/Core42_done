@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 12:48:24 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/05 22:22:24 by amismail         ###   ########.fr       */
+/*   Created: 2024/09/05 22:30:12 by amismail          #+#    #+#             */
+/*   Updated: 2024/09/05 22:31:29 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*ptr;
+	char	*newstr;
+	size_t	x;
+	size_t	slen;
 
-	ptr = (char *)s;
-	while (n)
+	if (s == NULL || f == NULL)
+		return (NULL);
+	slen = ft_strlen(s);
+	x = 0;
+	newstr = (char *)malloc(sizeof(char) * (slen + 1));
+	if (!newstr)
+		return (NULL);
+	while (s[x] != '\0')
 	{
-		*ptr = (char)c;
-		ptr++;
-		n--;
+		newstr[x] = f((unsigned int)x, s[x]);
+		x++;
 	}
-	return (s);
+	newstr[x] = '\0';
+	return (newstr);
 }
-
-/*int main()
-{
-	int x[10];
-	ft_memset(x,0,sizeof(x));
-	for (int i=0 ; i<10;i++)
-		printf("%d \n",x[i]);
-	return 0;
-}*/

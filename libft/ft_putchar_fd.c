@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 12:48:24 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/05 22:22:24 by amismail         ###   ########.fr       */
+/*   Created: 2024/09/05 22:22:46 by amismail          #+#    #+#             */
+/*   Updated: 2024/09/05 22:23:22 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	ft_putchar_fd(char c, int fd)
 {
-	char	*ptr;
-
-	ptr = (char *)s;
-	while (n)
-	{
-		*ptr = (char)c;
-		ptr++;
-		n--;
-	}
-	return (s);
+	write(fd, &c, 1);
 }
-
-/*int main()
-{
-	int x[10];
-	ft_memset(x,0,sizeof(x));
-	for (int i=0 ; i<10;i++)
-		printf("%d \n",x[i]);
-	return 0;
-}*/
