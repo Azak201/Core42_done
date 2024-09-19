@@ -6,73 +6,79 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:21:51 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/05 22:21:54 by amismail         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:40:21 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strrev(char *str);
-static char	*cond(int n);
-
-char	*ft_itoa(int n)
+static int	size(int n)
 {
-	int		i;
-	int		sign;
-	char	*tmp;
+	int	count;
 
-	i = 0;
-	sign = 1;
-	tmp = (char *) malloc (sizeof(char) * 12);
-	if (!tmp)
-		return (NULL);
-	if (n == -2147483648 || n == 0)
-		return (cond(n));
-	if (n < 0)
-	{
-		sign = -1;
-		n *= -1;
-	}
+	count = 0;
 	while (n > 0)
 	{
-		tmp[i++] = (n % 10) + '0';
-		n /= 10;
+		n = n / 10;
+		count++;
 	}
-	if (sign == -1)
-		tmp[i] = '-';
-	return (ft_strrev(tmp));
+	return (count);
 }
 
 static char	*cond(int n)
 {
+	char	*str;
+
 	if (n == 0)
-		return ("0");
-	return ("-2147483648");
+	{
+		str = ft_strdup("0");
+	}
+	if (n == -2147483648)
+	{
+		str = ft_strdup("-2147483648");
+	}
+	return (str);
 }
 
-static char	*ft_strrev(char *str)
+static void	mines(int *n, int *sign, int *slen)
 {
-	int		i;
-	int		j;
-	char	tmp;
+	*n = -*(n);
+	*sign = -1;
+	*slen = *slen + 1;
+}
 
-	i = 0;
-	j = ft_strlen (str);
-	while (j > i)
+char	*ft_itoa(int n)
+{
+	int		slen;
+	int		sign;
+	char	*str;
+
+	if (n == 0 || n == -2147483648)
+		return (cond(n));
+	sign = 1;
+	slen = 0;
+	if (n < 0)
+		mines(&n, &sign, &slen);
+	slen += size(n);
+	str = (char *) malloc (sizeof(char) * (slen + 1));
+	if (!str)
+		return (NULL);
+	*(str + slen) = '\0';
+	while (slen > 0)
 	{
-		j--;
-		tmp = str[j];
-		str[j] = str[i];
-		str[i] = tmp;
-		i++;
+		slen --;
+		*(str + slen) = (n % 10) + '0';
+		n = n / 10;
 	}
+	if (sign == -1)
+		*(str + slen) = '-';
 	return (str);
 }
 /*int main()
 {
     int i = 0;
-    int a[5]={53727,-155,634527,0,-2147483648};
-    while (i <= 4)
+    int a[6]={53727,-155,634527,0,-2147483648,2147483647};
+    while (i <= 5)
     {
         printf("%s \n",ft_itoa(a[i]));
         i++;

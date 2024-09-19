@@ -6,6 +6,11 @@ SRCS =	ft_atoi.c    ft_isalnum.c  ft_isdigit.c  ft_memchr.c  ft_memmove.c ft_put
 	       	ft_strrchr.c  ft_tolower.c
 OBJS = $(SRCS:.c=.o)
 
+BONSRC = ft_lstadd_back.c   ft_lstclear.c   ft_lstiter.c  ft_lstmap.c  ft_lstsize.c\
+		ft_lstadd_front.c  ft_lstdelone.c  ft_lstlast.c  ft_lstnew.c
+
+BONOBJ = $(BONSRC:.c=.o)
+
 NAME = libft.a
 
 CC = cc
@@ -16,14 +21,17 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	ar crs $@ $^
+
 %.o : %.c 
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus :	$(OBJ) $(BONOBJ)
+	ar rcs $(NAME) $(OBJS) $(BONOBJ)
 clean :
 	rm -f $(OBJS)
 fclean : clean
 	rm -f $(NAME)
 re : fclean all
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re bonus 
 

@@ -6,7 +6,7 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:06:19 by amismail          #+#    #+#             */
-/*   Updated: 2024/08/27 11:54:34 by amismail         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:36:12 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -18,7 +18,7 @@ char	*ft_strrchr(const char *s, int c)
 	i = ft_strlen(s);
 	while (i >= 0)
 	{
-		if (s[i] == c)
+		if (s[i] == (char)c)
 			return ((char *)s + i);
 		i--;
 	}
