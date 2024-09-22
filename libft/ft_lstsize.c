@@ -6,7 +6,7 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 15:47:21 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/19 15:53:12 by amismail         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:13:30 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_lstsize(t_list *lst)
 
 	ls = lst;
 	i = 0;
-	while (ls -> next != 0)
+	while (ls)
 	{
 		i ++;
 		ls = ls -> next;

@@ -6,7 +6,7 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 15:51:58 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/19 16:04:17 by amismail         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:17:56 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst -> next != 0)
+	while (lst)
+	{
+		if (lst->next == 0)
+			return (lst);
 		lst = lst -> next;
+	}
 	return (lst);
 }
