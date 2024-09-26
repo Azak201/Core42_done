@@ -6,7 +6,7 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:12:22 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/02 18:15:51 by amismail         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:15:50 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,28 @@ static int	wordnum(char *str, char del)
 	return (count);
 }
 
+static void	*ft_free(char **spstr)
+{
+	int	i;
+
+	i = 0;
+	while (spstr[i])
+	{
+		free(spstr[i]);
+		i++;
+	}
+	free (spstr);
+	return (NULL);
+}
+
+static void	ft_worlen(int *worlen, char const *s, char c)
+{
+	if (!ft_strchr(s, c))
+		*worlen = ft_strlen(s);
+	else
+		*worlen = ft_strchr(s, c) - s;
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**spstr;
@@ -38,20 +60,21 @@ char	**ft_split(char const *s, char c)
 	int		worlen;
 
 	ind = 0;
+	if (!s)
+		return (NULL);
 	spstr = (char **)malloc(sizeof(char *) * (wordnum((char *)s, c) + 1));
-	if (!s ||!spstr)
-		return (0);
+	if (!spstr)
+		return (NULL);
 	while (*s != '\0')
 	{
 		while (*s == c && *s)
 			s++;
 		if (*s)
 		{
-			if (!ft_strchr(s, c))
-				worlen = ft_strlen(s);
-			else
-				worlen = ft_strchr(s, c) - s;
+			ft_worlen(&worlen, s, c);
 			spstr[ind++] = ft_substr(s, 0, worlen);
+			if (!spstr[ind - 1])
+				return (ft_free(spstr));
 			s += worlen;
 		}
 	}
