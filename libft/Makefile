@@ -22,11 +22,11 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	ar crs $@ $^
 
-%.o : %.c 
+%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus :	$(BONOBJ) $(NAME)
-	ar rcs $(NAME) $(OBJS) $(BONOBJ)
+bonus :	$(NAME) $(BONOBJ)
+	ar rcs $(NAME) $(BONOBJ)
 clean :
 	rm -f $(OBJS) $(BONOBJ)
 fclean : clean

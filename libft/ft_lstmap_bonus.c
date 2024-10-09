@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 16:29:17 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/25 18:22:03 by amismail         ###   ########.fr       */
+/*   Updated: 2024/09/29 13:46:32 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*newlist;
 	t_list	*tmpnode;
+	void	*var;
 
 	if (!lst || !f || !del)
 		return (NULL);
-	newlist = ft_lstnew(f(lst->content));
-	if (!newlist)
-		return (NULL);
-	lst = lst->next;
+	newlist = NULL;
 	while (lst)
 	{
-		tmpnode = ft_lstnew(f(lst -> content));
+		var = f(lst->content);
+		tmpnode = ft_lstnew(var);
 		if (!tmpnode)
 		{
+			if (var)
+				free(var);
 			ft_clr(newlist, del);
 			return (NULL);
 		}
