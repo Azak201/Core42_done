@@ -1,0 +1,53 @@
+#include "libftprintf.h"
+
+static void ft_printnum(char *n, int flag)
+{
+    int len;
+
+    if (!n)
+        return;
+    len = ft_strlen(n) - 1;
+    if (flag == 1)
+    {
+        while (len >= 0)
+        {
+            ft_putchar(ft_tolower(n[len]));
+            len--;
+        }
+        return;
+    }
+    while (len >= 0)
+    {
+        ft_putchar((n[len]));
+        len--;
+    }
+}
+void ft_puthex(unsigned int num, int flag)
+{
+    char hex[17];
+    char x[9];
+    int i;
+
+    i = -1;
+    while (i++ < 8)
+        x[i] = 0;
+    ft_strlcpy(hex, "0123456789ABCDEF", 17);
+    i = 0;
+    if (num == 0)
+    {
+        write(1, "0", 1);
+        return;
+    }
+    while (num > 0)
+    {
+        x[i] = hex[num % 16];
+        i++;
+        num /= 16;
+    }
+    ft_printnum(x, flag);
+}
+
+/*int main()
+{
+    ft_puthex(2654, 1, 5);
+}*/

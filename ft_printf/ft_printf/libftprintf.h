@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int ft_printf(const char *format, ...);
+int definer(const char **str, va_list arglist);
 int ft_putu(unsigned int n);
 int ft_puthex(unsigned int num, int flag);
 int ft_putnbr(int n);
