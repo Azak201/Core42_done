@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   ft_putp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 15:18:02 by amismail          #+#    #+#             */
-/*   Updated: 2024/10/12 16:16:52 by amismail         ###   ########.fr       */
+/*   Created: 2024/10/12 15:23:07 by amismail          #+#    #+#             */
+/*   Updated: 2024/10/12 16:43:01 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
 static void	ft_printnum(char *n, int flag)
@@ -33,22 +32,20 @@ static void	ft_printnum(char *n, int flag)
 	}
 }
 
-int	ft_puthex(unsigned int num, int flag)
+int	ft_putp(unsigned long num, int flag)
 {
 	char	hex[17];
-	char	x[9];
+	char	x[17];
 	int		i;
 
 	i = -1;
 	while (i++ < 8)
 		x[i] = 0;
+	if (num == 0)
+		return (ft_putstr("(nil)"));
 	ft_strlcpy(hex, "0123456789ABCDEF", 17);
 	i = 0;
-	if (num == 0)
-	{
-		write (1, "0", 1);
-		return (1);
-	}
+	ft_putstr("0x");
 	while (num > 0)
 	{
 		x[i] = hex[num % 16];
@@ -57,10 +54,5 @@ int	ft_puthex(unsigned int num, int flag)
 	}
 	x[i] = '\0';
 	ft_printnum(x, flag);
-	return (i);
+	return (i + 2);
 }
-
-/*int main()
-{
-    ft_puthex(2654, 1, 5);
-}*/

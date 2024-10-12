@@ -1,11 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/12 15:21:54 by amismail          #+#    #+#             */
+/*   Updated: 2024/10/12 16:10:33 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "ft_printf.h"
 
-#include "libftprintf.h"
+static int	cond(int n);
 
-static void cond(int n);
-
-static void ft_printnum(char *n)
+static void	ft_printnum(char *n)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(n) - 1;
 	while (len >= 0)
@@ -15,19 +25,16 @@ static void ft_printnum(char *n)
 	}
 }
 
-void ft_putnbr(int n)
+int	ft_putnbr(int n)
 {
-	char num[12];
-	int sign;
-	int i;
+	char	num[12];
+	int		sign;
+	int		i;
 
 	sign = 1;
 	i = 0;
 	if (n == -2147483648 || n == 0)
-	{
-		cond(n);
-		return;
-	}
+		return (cond(n));
 	if (n < 0)
 	{
 		sign *= -1;
@@ -42,14 +49,18 @@ void ft_putnbr(int n)
 		num[i++] = '-';
 	num[i] = '\0';
 	ft_printnum(num);
+	return (i);
 }
 
-static void cond(int n)
+static int	cond(int n)
 {
 	if (n == -2147483648)
+	{
 		ft_putstr("-2147483648");
-	if (n == 0)
-		ft_putchar('0');
+		return (11);
+	}
+	ft_putchar('0');
+	return (1);
 }
 
 /*int main(void)

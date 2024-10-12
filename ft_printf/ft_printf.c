@@ -1,122 +1,74 @@
-#include "libftprintf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/12 15:17:03 by amismail          #+#    #+#             */
+/*   Updated: 2024/10/12 19:42:12 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "ft_printf.h"
 
-static void printarg2(const char **str, va_list arglist);
-/*static int pcount(const char *str)
+static int	pcount(const char *str);
+static int	cond(char c);
+
+int	ft_printf(const char *format, ...)
 {
-    int count = 0;
-    int i = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == '%')
-        {
-            count++;
-            if (str[i + 1] == '%')
-                i++;
-        }
-        i++;
-    }
-    return (count);
-}*/
+	va_list	list;
+	int		count;
+	int		prnum;
 
-/*static void printarg(const char **str, va_list arglist)
-{
-    char c;
-    char *s;
-    int i;
-
-    if (str == NULL)
-        return;
-    (*str)++;
-    if ((**str) == 'c')
-    {
-        c = va_arg(arglist, int);
-        ft_putchar(c);
-        (*str)++;
-        return;
-    }
-    else if ((**str) == 's')
-    {
-        s = va_arg(arglist, char *);
-        ft_putstr(s);
-        (*str)++;
-        return;
-    }
-    else if ((**str) == 'd' || (**str) == 'i')
-    {
-        i = va_arg(arglist, int);
-        ft_putnbr(i);
-        (*str)++;
-        return;
-    }
-    else
-        printarg2(str, arglist);
-}*/
-static void printarg2(const char **str, va_list arglist)
-{
-    unsigned int u;
-    void *p;
-    unsigned int hex;
-
-    if (str == NULL)
-        return;
-    if ((**str) == 'p')
-    {
-        p = va_arg(arglist, void *);
-        ft_putstr(p);
-        (*str)++;
-        return;
-    }
-    else if ((**str) == 'u')
-    {
-        u = va_arg(arglist, unsigned int);
-        ft_putu(u);
-        (*str)++;
-        return;
-    }
-    else if ((**str) == 'x' || (**str) == 'X')
-    {
-        hex = va_arg(arglist, unsigned int);
-        if ((**str) == 'x')
-            ft_puthex(hex, 1);
-        if ((**str) == 'X')
-            ft_puthex(hex, 2);
-        (*str)++;
-        return;
-    }
+	if (!format)
+		return (-1);
+	prnum = 0;
+	count = pcount(format);
+	va_start(list, format);
+	while (*format != '\0' && count >= 0)
+	{
+		while (*format != '\0' && *format != '%')
+		{
+			write(1, format, 1);
+			format++;
+			prnum++;
+		}
+		if ((count > 0) && *format == '%')
+		{
+			prnum += definer(&format, list);
+			count--;
+		}
+	}
+	return (prnum);
 }
 
-/*int ft_printf(const char *format, ...)
+static int	pcount(const char *str)
 {
-    va_list list;
-    int count;
-    int i;
+	int	count;
+	int	i;
 
-    if (format == NULL)
-        return (-1);
-    count = pcount(format);
-    va_start(list, format);
-    i = 0;
-    while (i < count)
-    {
-        while (*format != '\0' && *format != '%')
-        {
-            write(1, format, 1);
-            format++;
-        }
-        printarg(&format, list);
-        i++;
-    }
-    while (*format != '\0' && *format != '%')
-    {
-        write(1, format, 1);
-        format++;
-    }
-    return (1);
-}*/
+	i = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '%')
+		{
+			i++;
+			if (cond(str[i]))
+				count++;
+			else
+				return (-1);
+		}
+		i++;
+	}
+	return (count);
+}
 
-int main()
+static int	cond(char c)
 {
-    ft_printf("this is test %c\nfor%s\n what else %d \n %i \n%u \n %x   %X", 'A', "Amjed", -254254822, -254254822, (unsigned int)4294967295, 2005, -25637);
-    // printf("\nthis is test %c\nfor%s\n what else %d \n %i \n%u \n %x   %X", 'A', "Amjed", -254254822, -254254822, (unsigned int)4294967295, 2005, -25637);
-    return (0);
+	if (c == 'c' || c == 's' || c == 'i' || c == 'd')
+		return (1);
+	else if (c == 'u' || c == 'x' || c == 'X' || c == 'p' || c == '%')
+		return (1);
+	return (0);
 }
