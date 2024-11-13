@@ -34,19 +34,21 @@ char *ft_strjoin(char const *s1, char const *s2)
 
 int nfinder(const char *str)
 {
+	printf("nfinder call:");
 	int i;
 
 	i = 0;
 	while (str[i] != '\n' && str[i] != '\0')
 	{
-		printf("%c-", str[i]);
+		printf("%c", str[i]);
 		i++;
 		if (str[i] == '\n')
 		{
-			printf("found");
+			printf("\\n found in %d\n", i);
 			return (i);
 		}
 	}
+	printf("|(-1)\n");
 	return (-1);
 }
 
