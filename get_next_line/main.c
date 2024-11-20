@@ -7,12 +7,13 @@ int main()
         int fd;
         char *str;
 
-        fd = open("test.txt", O_RDONLY);
+        fd = 0;
 
         str = get_next_line(fd);
-
-        printf("%s", str);
-
+        printf("<%s>", str);
         free(str);
+
+
         close(fd);
+        return (0);
 }

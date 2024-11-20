@@ -6,7 +6,7 @@ size_t ft_strlen(const char *s)
 	int i;
 
 	i = 0;
-	while (s[i] != 0)
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }
@@ -24,32 +24,12 @@ char *ft_strjoin(char const *s1, char const *s2)
 	if (!str)
 		return (NULL);
 	pt = str;
-	while (*s1 != 0)
+	while (*s1 != '\0')
 		*pt++ = *s1++;
-	while (*s2 != 0)
+	while (*s2 != '\0')
 		*pt++ = *s2++;
 	*pt = 0;
 	return (str);
-}
-
-int nfinder(const char *str)
-{
-	printf("nfinder call:");
-	int i;
-
-	i = 0;
-	while (str[i] != '\n' && str[i] != '\0')
-	{
-		printf("%c", str[i]);
-		i++;
-		if (str[i] == '\n')
-		{
-			printf("\\n found in %d\n", i);
-			return (i);
-		}
-	}
-	printf("|(-1)\n");
-	return (-1);
 }
 
 char *ft_substr(char const *s, unsigned int start, size_t len)
@@ -95,3 +75,33 @@ char *ft_strdup(char *src)
 	x[i] = '\0';
 	return (x);
 }
+
+char *ft_strchr(const char *s, int c)
+{
+	const char *p;
+
+	p = s;
+	while (*p != 0)
+	{
+		if (*p == (char)c)
+			return ((char *)p);
+		p++;
+	}
+	if ((char)c == '\0')
+		return ((char *)p);
+	return (NULL);
+}
+
+/*void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*ptr;
+
+	ptr = (char *)s;
+	while (n)
+	{
+		*ptr = (char)c;
+		ptr++;
+		n--;
+	}
+	return (s);
+}*/
