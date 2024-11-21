@@ -1,9 +1,21 @@
-#include "get_next_line.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 16:40:56 by amismail          #+#    #+#             */
+/*   Updated: 2024/11/21 16:42:36 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-size_t ft_strlen(const char *s)
+#include "get_next_line.h"
+//#include <stdio.h>
+
+size_t	ft_strlen(const char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -11,12 +23,12 @@ size_t ft_strlen(const char *s)
 	return (i);
 }
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int len1;
-	int len2;
-	char *str;
-	char *pt;
+	int		len1;
+	int		len2;
+	char	*str;
+	char	*pt;
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
@@ -32,11 +44,11 @@ char *ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *sub;
-	char *substr;
-	char *dup;
+	char	*sub;
+	char	*substr;
+	char	*dup;
 
 	if (!s)
 		return (0);
@@ -58,10 +70,10 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-char *ft_strdup(char *src)
+char	*ft_strdup(char *src)
 {
-	char *x;
-	int i;
+	char	*x;
+	int		i;
 
 	i = 0;
 	x = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
@@ -76,9 +88,9 @@ char *ft_strdup(char *src)
 	return (x);
 }
 
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	const char *p;
+	const char	*p;
 
 	p = s;
 	while (*p != 0)
