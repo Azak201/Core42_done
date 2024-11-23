@@ -1,6 +1,0 @@
-this is firstline
-this is the sec
-
-forth
-fif
-th
