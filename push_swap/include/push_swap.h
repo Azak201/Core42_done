@@ -2,11 +2,12 @@
 #define PUSH_SWAP_H
 
 #include <stdlib.h>
+#include <libft.h>
 
 typedef struct s_dlist
 {
-        s_dlist *prev;
-        s_dlist *next;
+        struct s_dlist *prev;
+        struct s_dlist *next;
         long *value;
 } t_dlist;
 

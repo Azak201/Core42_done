@@ -1,28 +1,29 @@
-SRCS= srcs/listhandl.c srcs/main.c srcs/OP1.c srcs/OP2.c
-
+SRCS= srcs/listhandl.c srcs/OP1.c  srcs/OP2.c srcs/main.c
 OBJ = $(SRCS:srcs/%.c=obj/%.o)
 
 CC = cc 
 CFLAGS = -Wall -Wextra -Werror
 
-LIB = ./libft/libft.a 
 LIB_BATH = ./libft
-LIB_L = -L./libft -lft 
+
+LIB_L = -L./libft -lft
+
 INCLUDE = -I./include 
+INC2 = -I./libft/include
 
 NAME = push_swap
 
-all : $(LIB) $(NAME)
+all : LIB $(NAME)
 
-$(LIB):
-	make -C $(LIB_BATH) bonus
+LIB:
+	make -C $(LIB_BATH) 
 
 $(NAME) : $(OBJ)
 	$(CC) $^ $(LIB_L) -o $@
 
 obj/%.o : srcs/%.c
 	@mkdir -p obj
-	$(cc) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) $(INC2) -c $< -o $@
 
 
 clean :
@@ -36,5 +37,5 @@ fclean : clean
 
 re : fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re LIB
 

@@ -12,9 +12,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>
 # include <unistd.h>
-# include <string.h>
 # include <stdlib.h>
 
 typedef struct s_list
@@ -65,5 +63,10 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
+int		ft_is_numric(char *str);
+int		ft_strcmp(const char *st1, const char *st2);
+int		ft_is_unique(char **str);
+long	ft_latoi(const char *nptr);
+int		ft_is_in_bound(char **inputs);
 
 #endif

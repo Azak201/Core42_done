@@ -2,15 +2,13 @@
 
 define **input;
 
-input = cheaker(arc,arv)
-
+input = spliter(arc,arv)
 handler (input);
-
 sorter (input);
 return 0;
 ----end main;
 
---- cheaker(int arc ,char **arv)
+--- spliter(int arc ,char **arv)
 
 if (arc <= 1)
 	exit
@@ -23,7 +21,7 @@ else
 		tmp[i] = arv[i];
 }
 return (tmp);
---- end cheaker
+--- end spliter
 
 --- handler (char **input)
 
