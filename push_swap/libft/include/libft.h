@@ -65,7 +65,7 @@ t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 int		ft_is_numric(char *str);
 int		ft_strcmp(const char *st1, const char *st2);
-int		ft_is_unique(char **str);
+int		ft_is_uniquenum(char **str);
 long	ft_latoi(const char *nptr);
 int		ft_is_in_bound(char **inputs);
 

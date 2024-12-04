@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/04 16:53:01 by amismail          #+#    #+#             */
+/*   Updated: 2024/12/04 16:53:11 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 #include <stdio.h>
 
 static char **spliter(int arc, char **arv);
 static void handler(char **inputs);
 static void ft_exit();
-static void inserter(char **inputs);
+// static void inserter(char **inputs);
 
 int main(int arc, char **arv)
 {
@@ -19,10 +31,10 @@ int main(int arc, char **arv)
 		printf("%s \n", inputs[i++]);
 	handler(inputs);
 	// inserter(inputs);
-	ft_exit(2, inputs);
+	ft_exit(3, inputs);
 }
 
-// --------------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 
 static char **spliter(int arc, char **arv)
 {
@@ -45,33 +57,29 @@ static char **spliter(int arc, char **arv)
 			if (!tmp[i - 1])
 				ft_exit(2, tmp);
 		}
-		tmp[arc] = NULL;
+		tmp[i - 1] = NULL;
 	}
 	if (!tmp)
 		ft_exit(1, NULL);
 	return (tmp);
 }
 
-//---------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 static void handler(char **inputs)
 {
 	int i;
-	int c;
 
 	i = 0;
-	c = ft_is_unique(inputs);
-	if (c != 0)
-		ft_exit(2, inputs);
 	while (inputs[i])
 	{
-		c = ft_is_numric(inputs[i]);
-		if (c != 0)
+		if ((ft_is_numric(inputs[i])))
 			ft_exit(2, inputs);
 		i++;
 	}
-	c = ft_is_in_bound(inputs);
-	if (c != 0)
+	if ((ft_is_in_bound(inputs)))
+		ft_exit(2, inputs);
+	if ((ft_is_uniquenum(inputs)))
 		ft_exit(2, inputs);
 }
 
@@ -95,10 +103,16 @@ static void ft_exit(int flag, char **str)
 	}
 	else
 	{
-		while (str[i])
-			free(str[i++]);
-		free(str);
-		ft_putstr_fd("Error\n", 1);
+		if (str)
+		{
+			while (str[i])
+				free(str[i++]);
+			free(str);
+		}
+		if (flag == 2)
+			ft_putstr_fd("Error\n", 1);
+		else
+			ft_putstr_fd("Done\n", 1);
 		exit(1);
 	}
 }

@@ -5,7 +5,7 @@ SRCS =	srcs/ft_strlen.c srcs/ft_split.c srcs/ft_isprint.c srcs/ft_strtrim.c srcs
 		srcs/ft_calloc.c srcs/ft_atoi.c srcs/ft_itoa.c srcs/ft_strlcpy.c srcs/ft_memmove.c \
 		srcs/ft_isalpha.c srcs/ft_strchr.c srcs/ft_memchr.c srcs/ft_strnstr.c srcs/ft_striteri.c  \
 		srcs/ft_strmapi.c srcs/ft_strjoin.c srcs/ft_toupper.c srcs/ft_tolower.c srcs/ft_is_numric.c \
-		srcs/ft_strcmp.c srcs/ft_is_unique.c srcs/ft_is_in_bound.c srcs/ft_latoi.c srcs/ft_lstclear_bonus.c\
+		srcs/ft_strcmp.c srcs/ft_is_uniquenum.c srcs/ft_is_in_bound.c srcs/ft_latoi.c srcs/ft_lstclear_bonus.c\
 		srcs/ft_lstlast_bonus.c srcs/ft_lstdelone_bonus.c srcs/ft_lstmap_bonus.c srcs/ft_lstsize_bonus.c \
 		srcs/ft_lstiter_bonus.c srcs/ft_lstnew_bonus.c srcs/ft_lstadd_back_bonus.c srcs/ft_lstadd_front_bonus.c
 
