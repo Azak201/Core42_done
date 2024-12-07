@@ -16,7 +16,7 @@
 static char **spliter(int arc, char **arv);
 static void handler(char **inputs);
 static void ft_exit();
-// static void inserter(char **inputs);
+static void inserter(char **inputs);
 
 int main(int arc, char **arv)
 {
@@ -30,7 +30,7 @@ int main(int arc, char **arv)
 	while (inputs[i])
 		printf("%s \n", inputs[i++]);
 	handler(inputs);
-	// inserter(inputs);
+	inserter(inputs);
 	ft_exit(3, inputs);
 }
 
@@ -84,11 +84,27 @@ static void handler(char **inputs)
 }
 
 //-----------------------------------------------------------------------------
-
-/*static void inserter(char **inputs)
+void print(double cont)
 {
+	printf("%ld", cont);
+}
+static void inserter(char **inputs)
+{
+	int i;
+	t_list *stack;
+	t_list *item;
 
-}*/
+	i = 0;
+	if (!inputs)
+		ft_exit(1, NULL);
+	while (inputs[i])
+	{
+		item = ft_lstnew(inputs[i]);
+		ft_lstadd_back(&stack, item);
+		i++;
+	}
+	ft_lstiter(stack, print);
+}
 
 //-----------------------------------------------------------------------------
 static void ft_exit(int flag, char **str)
