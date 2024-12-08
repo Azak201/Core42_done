@@ -13,7 +13,6 @@
 #include <push_swap.h>
 #include <stdio.h>
 
-static void inserter(char **inputs);
 
 int main(int arc, char **arv)
 {
@@ -31,30 +30,3 @@ int main(int arc, char **arv)
 	ft_exit(3, inputs);
 }
 
-static void print(long *cont)
-{
-	printf("%ld\n", *cont);
-}
-static void inserter(char **inputs)
-{
-	int i;
-	long *num;
-	t_dlist *stack;
-	t_dlist *item;
-
-	i = 0;
-	num = (long *)malloc(sizeof(long));
-	if (!num || !inputs)
-		ft_exit(1, NULL);
-	*num = ft_latoi(inputs[i++]);
-	stack = ft_dlstnew(num);
-	while (inputs[i])
-	{
-		num = (long *)malloc(sizeof(long));
-		*num = ft_latoi(inputs[i]);
-		item = ft_dlstnew(num);
-		ft_dlstadd_back(&stack, item);
-		i++;
-	}
-	ft_dlstiter(stack, print);
-}
