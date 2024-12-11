@@ -7,7 +7,7 @@ char **spliter(int arc, char **arv)
 	int i;
 
 	if (arc <= 1)
-		ft_exit(1, NULL);
+		ft_exit(0, NULL);
 	else if (arc == 2)
 		tmp = ft_split(arv[1], ' ');
 	else
@@ -51,9 +51,10 @@ void ft_exit(int flag, char **str)
 	int i;
 
 	i = 0;
-	if (flag == 1)
+	if (flag == 1 || flag == 0)
 	{
-		ft_putstr_fd("Error\n", 1);
+		if (flag == 1)
+			ft_putstr_fd("Error\n", 1);
 		exit(1);
 	}
 	else
@@ -72,9 +73,9 @@ void ft_exit(int flag, char **str)
 	}
 }
 
-static void print(long *cont)
+static void print(long *cont, int i)
 {
-	printf("%ld\n", *cont);
+	printf("%ld \t %d\n", *cont, i);
 }
 void inserter(char **inputs)
 {
@@ -98,6 +99,6 @@ void inserter(char **inputs)
 		i++;
 	}
 	ft_dlstiter(stack, print); //============>delete this line
-	sorter(stack);
+	// sorter2(stack);
 	ft_dlstclear(&stack, free);
 }

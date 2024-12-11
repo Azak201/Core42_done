@@ -7,7 +7,7 @@
 typedef struct s_dlist
 {
 	long			*content;
-	struct s_dlist	*next;
+	struct s_dlist *next;
 }	t_dlist;
 
 
@@ -27,6 +27,17 @@ void				handler(char **inputs);
 void				ft_exit(int flag, char **str);
 void				inserter(char **inputs);
 void				sorter(t_dlist *stackA);
+// void 				sorter2(t_dlist *stack);
 
-
+void				swap_a(t_dlist **stackA);
+void				swap_b(t_dlist **stackB);
+void				swap_s(t_dlist **stackA, t_dlist **stackB);
+void				push_a(t_dlist **stackA, t_dlist **stackB);
+void				push_b(t_dlist **stackA, t_dlist **stackB);
+void				rotate_a(t_dlist **stackA);
+void				rotate_b(t_dlist **stackB);
+void				rotate_r(t_dlist **stackA, t_dlist **stackB);
+void				r_rotate_a(t_dlist **stackA);
+void				r_rotate_b(t_dlist **stackB);
+void				r_rotate_r(t_dlist **stackA, t_dlist **stackB);
 #endif

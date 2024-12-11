@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <limits.h>
 
 int ft_is_in_bound(char **inputs)
 {
