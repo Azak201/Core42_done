@@ -1,9 +1,9 @@
 
 #include <push_swap.h>
 
-t_dlist *ft_dlstnew(long *content)
+t_dlist	*ft_dlstnew(int content)
 {
-	t_dlist *newitem;
+	t_dlist	*newitem;
 
 	newitem = malloc(sizeof(t_dlist));
 	if (!newitem)

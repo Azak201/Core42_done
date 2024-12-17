@@ -1,8 +1,8 @@
 #include "libft.h"
 
-int ft_is_numric(char *str)
+int	ft_is_numric(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str || str[0] == '\0')

@@ -1,14 +1,15 @@
 
 #include <push_swap.h>
 
-void ft_dlstclear(t_dlist **lst, void (*del)(void *))
+void ft_dlstclear(t_dlist **lst, void (*del)(int))
 {
-	if (!lst || !del)
+	t_dlist *tmp;
+	if (!lst)
 		return;
-	if (*lst)
+	while (*lst)
 	{
-		ft_dlstclear(&(*lst)->next, del);
+		tmp = (*lst)->next;
 		ft_dlstdelone(*lst, del);
-		*lst = NULL;
+		*lst = tmp;
 	}
 }

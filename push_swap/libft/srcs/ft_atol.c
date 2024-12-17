@@ -1,10 +1,10 @@
 #include <libft.h>
 
-long ft_latoi(const char *nptr)
+long	ft_atol(const char *nptr)
 {
-	int count;
-	int negative;
-	long number;
+	int		count;
+	int		negative;
+	long	number;
 
 	count = 0;
 	negative = 1;

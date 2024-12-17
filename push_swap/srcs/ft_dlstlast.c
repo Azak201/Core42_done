@@ -10,7 +10,7 @@ t_dlist	*ft_dlstlast(t_dlist *lst)
 	{
 		if (lst->next == NULL)
 			return (lst);
-		lst = lst -> next;
+		lst = lst->next;
 	}
 	return (lst);
 }

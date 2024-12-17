@@ -1,6 +1,6 @@
 #include <push_swap.h>
-#include <stdio.h>
 
+static int clear(t_dlist **stack);
 char **spliter(int arc, char **arv)
 {
 	char **tmp;
@@ -54,7 +54,7 @@ void ft_exit(int flag, char **str)
 	if (flag == 1 || flag == 0)
 	{
 		if (flag == 1)
-			ft_putstr_fd("Error\n", 1);
+			ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
 	else
@@ -66,39 +66,42 @@ void ft_exit(int flag, char **str)
 			free(str);
 		}
 		if (flag == 2)
-			ft_putstr_fd("Error\n", 1);
-		else
-			ft_putstr_fd("Done\n", 1);
+			ft_putstr_fd("Error\n", 2);
+		if (flag == 3)
+			exit(0);
 		exit(1);
 	}
 }
 
-static void print(long *cont, int i)
-{
-	printf("%ld \t %d\n", *cont, i);
-}
-void inserter(char **inputs)
+int inserter(char **inputs)
 {
 	int i;
-	long *num;
+	int num;
 	t_dlist *stack;
 	t_dlist *item;
 
 	i = 0;
-	num = (long *)malloc(sizeof(long));
-	if (!num || !inputs)
-		ft_exit(1, NULL);
-	*num = ft_latoi(inputs[i++]);
+	if (!inputs)
+		return (1);
+	num = ft_atol(inputs[i++]);
 	stack = ft_dlstnew(num);
+	if (!stack)
+		return (1);
 	while (inputs[i])
 	{
-		num = (long *)malloc(sizeof(long));
-		*num = ft_latoi(inputs[i]);
+		num = ft_atol(inputs[i]);
 		item = ft_dlstnew(num);
+		if (!item)
+			return (clear(&stack));
 		ft_dlstadd_back(&stack, item);
 		i++;
 	}
-	ft_dlstiter(stack, print); //============>delete this line
-	// sorter2(stack);
-	ft_dlstclear(&stack, free);
+	sorter(stack);
+	return (0);
+}
+
+static int clear(t_dlist **stack)
+{
+	ft_dlstclear(&(*stack), NULL);
+	return (1);
 }
