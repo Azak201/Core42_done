@@ -18,7 +18,7 @@ int sorter(t_dlist *stack_a)
 	else if (is_sorted(stack_a) == 0)
 		;
 	else if (size == 2)
-		handle2(&stack_a);
+		handle2(&stack_a, 1);
 	else if (size == 3)
 		handle3(&stack_a);
 	else if (size == 4)

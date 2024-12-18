@@ -1,13 +1,18 @@
 
 #include <push_swap.h>
 
-void handle2(t_dlist **stack)
+void handle2(t_dlist **stack, int flag)
 {
 	t_dlist *tmp;
 
 	tmp = (*stack)->next;
 	if ((*stack)->index > tmp->index)
-		swap_a(&(*stack));
+	{
+		if (flag == 1)
+			swap_a(&(*stack));
+		else
+			swap_b(&(*stack));
+	}
 }
 
 void handle3(t_dlist **stack_a)
@@ -70,11 +75,11 @@ void handle5(t_dlist **stack_a, t_dlist **stack_b)
 	while (((*stack_a)->index != 0) && ((*stack_a)->index != 4))
 		rotate_a(&(*stack_a));
 	push_b(&(*stack_a), &(*stack_b));
-	while ((((*stack_a)->index != 0) && ((*stack_a)->index != 4)))
+	while (((*stack_a)->index != 0) && ((*stack_a)->index != 4))
 		rotate_a(&(*stack_a));
 	push_b(&(*stack_a), &(*stack_b));
 	handle3(&(*stack_a));
-	handle2(&(*stack_b));
+	handle2(&(*stack_b), 2);
 	push_a(&(*stack_a), &(*stack_b));
 	push_a(&(*stack_a), &(*stack_b));
 	rotate_a(&(*stack_a));

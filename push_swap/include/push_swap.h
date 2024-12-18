@@ -36,7 +36,7 @@ void		rotate_r(t_dlist **stack_a, t_dlist **stack_b);
 void		r_rotate_a(t_dlist **stack_a);
 void		r_rotate_b(t_dlist **stack_b);
 void		r_rotate_r(t_dlist **stack_a, t_dlist **stack_b);
-void		handle2(t_dlist **stack);
+void		handle2(t_dlist **stack, int flag);
 void		handle3(t_dlist **stack_a);
 void		handle4(t_dlist **stack_a, t_dlist **stack_b);
 void		handle5(t_dlist **stack_a, t_dlist **stack_b);
