@@ -6,12 +6,12 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:30:45 by amismail          #+#    #+#             */
-/*   Updated: 2024/08/28 16:38:15 by amismail         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:03:27 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	int	count;
 	int	negative;

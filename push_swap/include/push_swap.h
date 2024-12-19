@@ -1,15 +1,27 @@
-#ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/19 14:39:33 by amismail          #+#    #+#             */
+/*   Updated: 2024/12/19 14:39:37 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdlib.h>
-#include <libft.h>
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+# include <stdlib.h>
+# include <libft.h>
 
 typedef struct s_dlist
 {
 	int				content;
 	struct s_dlist	*next;
 	int				index;
-} t_dlist;
+}	t_dlist;
 
 void		ft_dlstadd_back(t_dlist **lst, t_dlist *new);
 void		ft_dlstadd_front(t_dlist **lst, t_dlist *new);

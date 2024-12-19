@@ -1,9 +1,19 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simplesrt.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/19 14:22:55 by amismail          #+#    #+#             */
+/*   Updated: 2024/12/19 14:22:57 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include <push_swap.h>
 
-void handle2(t_dlist **stack, int flag)
+void	handle2(t_dlist **stack, int flag)
 {
-	t_dlist *tmp;
+	t_dlist	*tmp;
 
 	tmp = (*stack)->next;
 	if ((*stack)->index > tmp->index)
@@ -15,11 +25,11 @@ void handle2(t_dlist **stack, int flag)
 	}
 }
 
-void handle3(t_dlist **stack_a)
+void	handle3(t_dlist **stack_a)
 {
-	int i;
-	int max;
-	t_dlist *tmp;
+	int		i;
+	int		max;
+	t_dlist	*tmp;
 
 	tmp = *stack_a;
 	i = 0;
@@ -42,10 +52,10 @@ void handle3(t_dlist **stack_a)
 		swap_a(&(*stack_a));
 }
 
-void handle4(t_dlist **stack_a, t_dlist **stack_b)
+void	handle4(t_dlist **stack_a, t_dlist **stack_b)
 {
-	int i;
-	t_dlist *tmp;
+	int		i;
+	t_dlist	*tmp;
 
 	tmp = *stack_a;
 	i = 0;
@@ -70,7 +80,7 @@ void handle4(t_dlist **stack_a, t_dlist **stack_b)
 	push_a(&(*stack_a), &(*stack_b));
 }
 
-void handle5(t_dlist **stack_a, t_dlist **stack_b)
+void	handle5(t_dlist **stack_a, t_dlist **stack_b)
 {
 	while (((*stack_a)->index != 0) && ((*stack_a)->index != 4))
 		rotate_a(&(*stack_a));
@@ -85,9 +95,9 @@ void handle5(t_dlist **stack_a, t_dlist **stack_b)
 	rotate_a(&(*stack_a));
 }
 
-int is_sorted(t_dlist *stack)
+int	is_sorted(t_dlist *stack)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((i == stack->index))

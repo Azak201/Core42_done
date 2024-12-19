@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   listhandl.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/19 14:20:50 by amismail          #+#    #+#             */
+/*   Updated: 2024/12/19 14:21:08 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include <push_swap.h>
 
-static int clear(t_dlist **stack);
-char **spliter(int arc, char **arv)
+static int	clear(t_dlist **stack);
+
+char	**spliter(int arc, char **arv)
 {
-	char **tmp;
-	int i;
+	char	**tmp;
+	int		i;
 
 	if (arc <= 1)
 		ft_exit(0, NULL);
@@ -29,9 +41,9 @@ char **spliter(int arc, char **arv)
 	return (tmp);
 }
 
-void handler(char **inputs)
+void	handler(char **inputs)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (inputs[i])
@@ -46,9 +58,9 @@ void handler(char **inputs)
 		ft_exit(2, inputs);
 }
 
-void ft_exit(int flag, char **str)
+void	ft_exit(int flag, char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (flag == 1 || flag == 0)
@@ -73,12 +85,12 @@ void ft_exit(int flag, char **str)
 	}
 }
 
-int inserter(char **inputs)
+int	inserter(char **inputs)
 {
-	int i;
-	int num;
-	t_dlist *stack;
-	t_dlist *item;
+	int		i;
+	int		num;
+	t_dlist	*stack;
+	t_dlist	*item;
 
 	i = 0;
 	if (!inputs)
@@ -100,7 +112,7 @@ int inserter(char **inputs)
 	return (0);
 }
 
-static int clear(t_dlist **stack)
+static int	clear(t_dlist **stack)
 {
 	ft_dlstclear(&(*stack), NULL);
 	return (1);
