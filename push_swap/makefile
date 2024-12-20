@@ -24,11 +24,11 @@ LIB:
 	make -C $(LIB_BATH) 
 
 $(NAME) : $(OBJ)
-	$(CC) $^ -g $(LIB_L) -o $@
+	$(CC) $^  $(LIB_L) -o $@
 
 obj/%.o : srcs/%.c
 	mkdir -p obj
-	$(CC) $(CFLAGS) -g $(INCLUDE) $(INC2) -c $< -o $@
+	$(CC) $(CFLAGS)  $(INCLUDE) $(INC2) -c $< -o $@
 
 
 clean :
