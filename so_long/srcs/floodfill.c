@@ -8,8 +8,8 @@ void flood_fill(t_map **map, int p_row, int p_col)
 		return;
 	(*map)->fmap[p_row][p_col] = 'F';
 	flood_fill(&(*map), p_row - 1, p_col);
-	flood_fill(&(*map), p_row, p_col + 1);
 	flood_fill(&(*map), p_row + 1, p_col);
+	flood_fill(&(*map), p_row, p_col + 1);
 	flood_fill(&(*map), p_row, p_col - 1);
 }
 

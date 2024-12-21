@@ -25,7 +25,7 @@ void ft_free_map_struct(int flag, t_map **stru, char *message)
 		ft_free(0, ((*stru)->fmap), NULL);
 	if ((*stru)->map != NULL)
 		ft_free(0, ((*stru)->map), NULL);
-	free(stru);
+	free(*stru);
 	if (flag != 0)
 		ft_exit_fd(0, message, 0);
 }

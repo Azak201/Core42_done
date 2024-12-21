@@ -1,8 +1,8 @@
 #include <so_long.h>
 
 static void counter(char mc, int *c, int *p, int *e);
-static void eadges_validating(char **map);
-static void validate_map_contant(char **map, t_map *main_map);
+static void eadges_validating(t_map **tmap);
+static void validate_map_contant(char **map, t_map **main_map);
 
 char **handling_map_shape(char **line)
 {
@@ -32,24 +32,6 @@ char **handling_map_shape(char **line)
 	}
 	return (tmp);
 }
-/*void print_maps(t_map *map)
-{
-	int i;
-
-	i = 0;
-	while (map->map[i] != NULL)
-	{
-		ft_printf("%s\n", map->map[i]);
-		i++;
-	}
-	i = 0;
-	ft_printf("\n------------------\n");
-	while (map->fmap[i] != NULL)
-	{
-		ft_printf("%s\n", map->fmap[i]);
-		i++;
-	}
-}*/
 
 t_map *map_validation(char **map)
 {
@@ -58,21 +40,21 @@ t_map *map_validation(char **map)
 
 	i = 0;
 	main_map = define_struct(map);
-	validate_map_contant(map, &(*main_map));
-	eadges_validating(map);
-	find_p(&(*main_map));
-	create_fmap(&main_map);
+	validate_map_contant(map, &main_map);
 	while (main_map->map[i] != NULL)
 		i++;
 	main_map->col_num = ft_strlen(main_map->map[0]);
 	main_map->row_num = i;
+	eadges_validating(&main_map);
+	find_p(&(*main_map));
+	main_map->fmap = create_fmap(&main_map);
 	flood_fill(&main_map, main_map->row_p, main_map->col_p);
-	// if ((find_C(main_map)) == 1)
-	// ft_free_map_struct(1, &main_map, "C is not reachable");
+	if ((find_C(main_map)) == 1)
+		ft_free_map_struct(1, &main_map, "C is not reachable");
 	return (main_map);
 }
 
-static void validate_map_contant(char **map, t_map *main_map)
+static void validate_map_contant(char **map, t_map **main_map)
 {
 	int i;
 	int j;
@@ -84,14 +66,14 @@ static void validate_map_contant(char **map, t_map *main_map)
 		while (map[i][j] != '\0')
 		{
 			if (ft_strchr("01EPC", map[i][j]) == NULL)
-				ft_free(1, map, "map contant not valid");
-			counter(map[i][j], &(main_map->C), &(main_map->P), &(main_map->E));
+				ft_free_map_struct(1, main_map, "map contant not valid");
+			counter(map[i][j], &((*main_map)->C), &((*main_map)->P), &((*main_map)->E));
 			j++;
 		}
 		i++;
 	}
-	if (main_map->C < 1 || main_map->E != 1 || main_map->P != 1)
-		ft_free(1, map, "invalid number of E, P or C");
+	if ((*main_map)->C < 1 || (*main_map)->E != 1 || (*main_map)->P != 1)
+		ft_free_map_struct(1, main_map, "invalid number of E, P or C");
 }
 static void counter(char mc, int *c, int *p, int *e)
 {
@@ -102,31 +84,23 @@ static void counter(char mc, int *c, int *p, int *e)
 	if (mc == 'E')
 		*e = *e + 1;
 }
-static void eadges_validating(char **map)
+static void eadges_validating(t_map **tmap)
 {
 	int i;
 	int j;
-	int col;
-	int row;
 
 	i = 0;
-	j = 0;
-	col = ft_strlen(map[0]);
-	while (map[i] != NULL)
-		i++;
-	row = i;
-	i = 0;
-	while (map[i] != NULL)
+	while ((*tmap)->map[i] != NULL)
 	{
 		j = 0;
-		while (map[i][j] != '\0')
+		while ((*tmap)->map[i][j] != '\0')
 		{
-			if (map[0][j] != '1' || map[row - 1][j] != '1')
-				ft_free(1, map, " rowe adge are not 1 !!?");
+			if ((*tmap)->map[0][j] != '1' || (*tmap)->map[(*tmap)->row_num - 1][j] != '1')
+				ft_free_map_struct(1, tmap, " rowe adge are not 1 !!?");
 			j++;
 		}
-		if (map[i][0] != '1' || map[i][col - 1] != '1')
-			ft_free(1, map, "colums are not 1 !!?");
+		if ((*tmap)->map[i][0] != '1' || (*tmap)->map[i][(*tmap)->col_num - 1] != '1')
+			ft_free_map_struct(1, tmap, "colums are not 1 !!?");
 		i++;
 	}
 }

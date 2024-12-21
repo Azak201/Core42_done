@@ -40,25 +40,30 @@ void find_p(t_map *map)
 	}
 }
 
-void create_fmap(t_map **main_map)
+char **create_fmap(t_map **main_map)
 {
 	int i;
+	char **fmap;
 
 	i = 0;
 	while ((*main_map)->map[i] != NULL)
 		i++;
-	(*main_map)->fmap = (char **)malloc(sizeof(char *) * i);
-	if (!((*main_map)->fmap))
+	fmap = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!fmap)
 		ft_free_map_struct(1, &(*main_map), "fail Alocation in fmap");
 	i = 0;
 	while ((*main_map)->map[i] != NULL)
 	{
-		(*main_map)->fmap[i] = ft_strdup((*main_map)->map[i]);
-		if (!((*main_map)->fmap[i]))
+		fmap[i] = ft_strdup((*main_map)->map[i]);
+		if (!fmap[i])
+		{
+			ft_free(0, fmap, 0);
 			ft_free_map_struct(1, &(*main_map), "fail Alocation in fmap");
+		}
 		i++;
 	}
-	(*main_map)->fmap[i] = NULL;
+	fmap[i] = NULL;
+	return (fmap);
 }
 int find_C(t_map *map)
 {
@@ -71,7 +76,7 @@ int find_C(t_map *map)
 		j = 0;
 		while (map->fmap[i][j] != '\0')
 		{
-			if (map->fmap[i][j] != 'C')
+			if (map->fmap[i][j] == 'C')
 				return (1);
 			j++;
 		}
