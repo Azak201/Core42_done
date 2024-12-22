@@ -46,6 +46,11 @@ void	handler(char **inputs)
 	int	i;
 
 	i = 0;
+	if (!inputs[0])
+	{
+		free(inputs);
+		exit(0);
+	}
 	while (inputs[i])
 	{
 		if ((ft_is_numric(inputs[i])))
@@ -77,10 +82,10 @@ void	ft_exit(int flag, char **str)
 				free(str[i++]);
 			free(str);
 		}
-		if (flag == 2)
-			ft_putstr_fd("Error\n", 2);
 		if (flag == 3)
 			exit(0);
+		else
+			ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
 }

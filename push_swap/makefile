@@ -28,7 +28,7 @@ $(NAME) : $(OBJ)
 
 obj/%.o : srcs/%.c
 	mkdir -p obj
-	$(CC) $(CFLAGS)  $(INCLUDE) $(INC2) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) $(INC2) -c $< -o $@
 
 
 clean :
