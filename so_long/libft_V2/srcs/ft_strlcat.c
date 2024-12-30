@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 15:53:34 by amismail          #+#    #+#             */
-/*   Updated: 2024/10/12 16:13:39 by amismail         ###   ########.fr       */
+/*   Created: 2024/08/28 13:09:26 by amismail          #+#    #+#             */
+/*   Updated: 2024/08/28 15:30:08 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t		i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	while (i < (size - 1) && src[i] != '\0')
-	{
-		dst[i] = src[i];
+	j = 0;
+	while (dst[i] && i < size)
 		i++;
+	while (src[j] && (i + j + 1) < size)
+	{
+		dst[i + j] = src[j];
+		j++;
 	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
+	if (i < size)
+		dst[i + j] = '\0';
+	return (i + ft_strlen(src));
 }
+/*int main(void)
+{
+	char dest[10] = "Hello";
+	char src[] = " World";
+	size_t len;
+	len = ft_strlcat(dest, src, sizeof(dest));
+	printf("%s\n", dest);
+	printf("len: %zu\n", len);
+
+	return 0;
+}*/
