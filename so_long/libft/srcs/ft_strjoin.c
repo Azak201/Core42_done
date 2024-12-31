@@ -6,7 +6,7 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:46:29 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/02 18:17:35 by amismail         ###   ########.fr       */
+/*   Updated: 2024/12/31 19:10:39 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!str)
 		return (NULL);
 	pt = str;
-	while (*s1 != 0)
+	while (s1 != NULL && *s1 != 0)
 		*pt++ = *s1++;
-	while (*s2 != 0)
+	while (s2 != NULL && *s2 != 0)
 		*pt++ = *s2++;
 	*pt = 0;
 	return (str);

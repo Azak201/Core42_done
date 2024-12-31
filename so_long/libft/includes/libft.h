@@ -6,18 +6,21 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 23:04:14 by amismail          #+#    #+#             */
-/*   Updated: 2024/09/19 17:18:36 by amismail         ###   ########.fr       */
+/*   Updated: 2024/12/31 19:33:15 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>
 # include <unistd.h>
-# include <string.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stddef.h>
 
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1000
+#endif // BUFFER_SIZE
 
 typedef struct s_list
 {
@@ -25,9 +28,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1000
-#endif // BUFFER_SIZE
+
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);

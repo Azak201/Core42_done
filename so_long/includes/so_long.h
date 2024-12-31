@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 15:53:50 by amismail          #+#    #+#             */
-/*   Updated: 2024/10/12 16:13:17 by amismail         ###   ########.fr       */
+/*   Created: 2024/12/30 17:42:32 by amismail          #+#    #+#             */
+/*   Updated: 2024/12/30 17:42:35 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-size_t	ft_strlen(const char *s)
-{
-	int	i;
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
-}
+#include <libft.h>
+#include <fcntl.h>
+
+#endif

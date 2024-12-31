@@ -24,10 +24,8 @@ $(NAME) : $(OBJS)
 
 obj/%.o : srcs/%.c
 	mkdir -p obj
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -g -c $< -o $@
 
-bonus :	$(NAME) $(BONOBJ)
-	ar rcs $(NAME) $(BONOBJ)
 clean :
 	rm -f $(OBJS) $(BONOBJ)
 	rm -rf obj
