@@ -6,32 +6,37 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:38:33 by amismail          #+#    #+#             */
-/*   Updated: 2024/12/31 23:10:27 by amismail         ###   ########.fr       */
+/*   Updated: 2025/01/01 06:25:33 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <so_long.h>
 
-void ft_exit(int flag, char *message, int fd);
-void fail_join(char *tmp, char *tmp2, int fd);
+void ft_exit_fd(int flag, char *message, int fd);
+static void fail_join(char *tmp, char *tmp2, int fd);
 char *fileread(int fd);
+void ft_free(int flag, char **arr, char *message);
 
 int main(int arc, char **argv)
 {
 	int fd;
-	char *map;
+	char *line;
+	char **map;
 	int len;
 
 	if (arc != 2)
-		ft_exit(0, "Error in args number", 0);
+		ft_exit_fd(0, "invalid args number", 0);
 	len = ft_strlen(argv[1]);
 	if ((ft_strncmp(argv[1] + (len - 4), ".ber", 5) != 0))
-		ft_exit(0, "Error in File extention", 0);
+		ft_exit_fd(0, "invalid File extention", 0);
 	fd = open(argv[1], O_RDONLY);
-	map = fileread(fd);
-	free(map);
+	line = fileread(fd);
 	close(fd);
+	map = handling(&line);
+	free(line);
+	map_validation(map);
+	ft_free(0, map, NULL);
 }
 
 char *fileread(int fd)
@@ -42,14 +47,14 @@ char *fileread(int fd)
 	char *line;
 
 	if (fd < 0)
-		ft_exit(0, "Error if opening file", 0);
+		ft_exit_fd(0, "failure in opening file", 0);
 	line = NULL;
 	i = 0;
 	while (1)
 	{
 		tmp = get_next_line(fd);
 		if (!tmp && i == 0)
-			ft_exit(1, "Error in read or empty file", fd);
+			ft_exit_fd(1, "failure in read or file is empty", fd);
 		tmp2 = line;
 		line = ft_strjoin(tmp2, tmp);
 		if (i++ > 0)
@@ -62,22 +67,31 @@ char *fileread(int fd)
 	}
 }
 
-void fail_join(char *tmp, char *tmp2, int fd)
+static void fail_join(char *tmp, char *tmp2, int fd)
 {
 	if (tmp)
 		free(tmp);
 	if (tmp2)
 		free(tmp2);
-	ft_exit(1, "Error in reading file", fd);
+	ft_exit_fd(1, "failure in reading file", fd);
 }
 
-void ft_exit(int flag, char *message, int fd)
+void ft_exit_fd(int flag, char *message, int fd)
 {
-	if (flag < 4)
-	{
-		ft_printf("%s\n", message);
-		if (flag == 1)
-			close(fd);
-		exit(1);
-	}
+	ft_printf("Error\n%s\n", message);
+	if (flag == 1)
+		close(fd);
+	exit(1);
+}
+
+void ft_free(int flag, char **arr, char *message)
+{
+	int i;
+
+	i = 0;
+	while (arr[i] != NULL)
+		free(arr[i++]);
+	free(arr);
+	if (flag != 0)
+		ft_exit_fd(0, message, 0);
 }
