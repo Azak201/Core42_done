@@ -2,6 +2,7 @@
 
 static void counter(char mc, int *c, int *p, int *e);
 static void eadges_validating(char **map);
+static void validate_map_contant(char **map, t_map *main_map);
 
 char **handling(char **line)
 {
@@ -31,18 +32,28 @@ char **handling(char **line)
 	return (tmp);
 }
 
+// element[0] = C element[1] = P element[2] = E
 void map_validation(char **map)
 {
-	int c;
-	int p;
-	int e;
+	// int i;
+	// int j;
+	t_map main_map;
+
+	// i = 0;
+	main_map = define_struct(map);
+	validate_map_contant(map, &main_map);
+	eadges_validating(map);
+	find_p(&main_map);
+	// if (flood_fill(main_map,) != 0)
+	// ;
+}
+
+static void validate_map_contant(char **map, t_map *main_map)
+{
 	int i;
 	int j;
 
 	i = 0;
-	c = 0;
-	p = 0;
-	e = 0;
 	while (map[i] != NULL)
 	{
 		j = 0;
@@ -50,16 +61,14 @@ void map_validation(char **map)
 		{
 			if (ft_strchr("01EPC", map[i][j]) == NULL)
 				ft_free(1, map, "map contant not valid");
-			counter(map[i][j], &c, &p, &e);
+			counter(map[i][j], &(main_map->C), &(main_map->P), &(main_map->E));
 			j++;
 		}
 		i++;
 	}
-	if (c < 1 || p != 1 || e != 1)
+	if (main_map->C < 1 || main_map->E != 1 || main_map->P != 1)
 		ft_free(1, map, "invalid number of E, P or C");
-	eadges_validating(map);
 }
-
 static void counter(char mc, int *c, int *p, int *e)
 {
 	if (mc == 'C')
