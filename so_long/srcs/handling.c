@@ -21,7 +21,7 @@ char **handling(char **line)
 	while (tmp[i] != NULL)
 	{
 		len = ft_strlen(tmp[i]);
-		if ((cmp != len) || (tmp[i + 1] == NULL && i < 2) || len < 5)
+		if ((cmp != len) || (tmp[i + 1] == NULL && i < 2) || len < 3)
 		{
 			free(*line);
 			ft_free(1, tmp, "invalid  map shape");
