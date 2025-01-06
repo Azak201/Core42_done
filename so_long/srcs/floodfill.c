@@ -1,38 +1,30 @@
 #include <so_long.h>
 
-// int flood_fill(t_map *map, int *arr)
-//{
-// }
-
-t_map define_struct(char **map_str)
+void flood_fill(t_map **map, int p_row, int p_col)
 {
-	t_map main_map;
-	main_map.map = map_str;
-	main_map.col_p = 0;
-	main_map.row_p = 0;
-	main_map.C = 0;
-	main_map.P = 0;
-	main_map.E = 0;
-	return (main_map);
+	if (p_row < 0 || p_col < 0 || p_col >= (*map)->col_num || p_row >= (*map)->row_num)
+		return;
+	if ((*map)->fmap[p_row][p_col] == '1' || (*map)->fmap[p_row][p_col] == 'F')
+		return;
+	(*map)->fmap[p_row][p_col] = 'F';
+	flood_fill(&(*map), p_row - 1, p_col);
+	flood_fill(&(*map), p_row, p_col + 1);
+	flood_fill(&(*map), p_row + 1, p_col);
+	flood_fill(&(*map), p_row, p_col - 1);
 }
-void find_p(t_map *map)
+
+void check_empty_lines(char **line)
 {
 	int i;
-	int j;
 
 	i = 0;
-	while (map->map[i])
+	while ((*line)[i] != '\0')
 	{
-		j = 0;
-		while (map->map[i][j] != '\0')
+		if ((((*line)[i] == '\n') && ((*line)[i + 1] == '\0')) ||
+			(((*line)[i] == '\n') && ((*line)[i + 1] == '\n')))
 		{
-			if (map->map[i][j] == 'P')
-			{
-				map->col_p = j;
-				map->row_p = i;
-				return;
-			}
-			j++;
+			free(*line);
+			ft_exit_fd(0, "there is empty lines", 0);
 		}
 		i++;
 	}

@@ -4,13 +4,14 @@ static void counter(char mc, int *c, int *p, int *e);
 static void eadges_validating(char **map);
 static void validate_map_contant(char **map, t_map *main_map);
 
-char **handling(char **line)
+char **handling_map_shape(char **line)
 {
 	char **tmp;
 	int i;
 	int cmp;
 	int len;
 
+	check_empty_lines(&(*line));
 	tmp = ft_split(*line, '\n');
 	if (!tmp)
 	{
@@ -31,21 +32,44 @@ char **handling(char **line)
 	}
 	return (tmp);
 }
-
-// element[0] = C element[1] = P element[2] = E
-void map_validation(char **map)
+/*void print_maps(t_map *map)
 {
-	// int i;
-	// int j;
-	t_map main_map;
+	int i;
 
-	// i = 0;
+	i = 0;
+	while (map->map[i] != NULL)
+	{
+		ft_printf("%s\n", map->map[i]);
+		i++;
+	}
+	i = 0;
+	ft_printf("\n------------------\n");
+	while (map->fmap[i] != NULL)
+	{
+		ft_printf("%s\n", map->fmap[i]);
+		i++;
+	}
+}*/
+
+t_map *map_validation(char **map)
+{
+	int i;
+	t_map *main_map;
+
+	i = 0;
 	main_map = define_struct(map);
-	validate_map_contant(map, &main_map);
+	validate_map_contant(map, &(*main_map));
 	eadges_validating(map);
-	find_p(&main_map);
-	// if (flood_fill(main_map,) != 0)
-	// ;
+	find_p(&(*main_map));
+	create_fmap(&main_map);
+	while (main_map->map[i] != NULL)
+		i++;
+	main_map->col_num = ft_strlen(main_map->map[0]);
+	main_map->row_num = i;
+	flood_fill(&main_map, main_map->row_p, main_map->col_p);
+	// if ((find_C(main_map)) == 1)
+	// ft_free_map_struct(1, &main_map, "C is not reachable");
+	return (main_map);
 }
 
 static void validate_map_contant(char **map, t_map *main_map)

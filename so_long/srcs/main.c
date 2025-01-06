@@ -13,10 +13,8 @@
 #include <mlx.h>
 #include <so_long.h>
 
-void ft_exit_fd(int flag, char *message, int fd);
 static void fail_join(char *tmp, char *tmp2, int fd);
-char *fileread(int fd);
-void ft_free(int flag, char **arr, char *message);
+static char *fileread(int fd);
 
 int main(int arc, char **argv)
 {
@@ -24,6 +22,7 @@ int main(int arc, char **argv)
 	char *line;
 	char **map;
 	int len;
+	t_map *tmap;
 
 	if (arc != 2)
 		ft_exit_fd(0, "invalid args number", 0);
@@ -33,13 +32,13 @@ int main(int arc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	line = fileread(fd);
 	close(fd);
-	map = handling(&line);
+	map = handling_map_shape(&line);
 	free(line);
-	map_validation(map);
-	ft_free(0, map, NULL);
+	tmap = map_validation(map);
+	ft_free_map_struct(1, &tmap, "map done");
 }
 
-char *fileread(int fd)
+static char *fileread(int fd)
 {
 	int i;
 	char *tmp;
@@ -74,24 +73,4 @@ static void fail_join(char *tmp, char *tmp2, int fd)
 	if (tmp2)
 		free(tmp2);
 	ft_exit_fd(1, "failure in reading file", fd);
-}
-
-void ft_exit_fd(int flag, char *message, int fd)
-{
-	ft_printf("Error\n%s\n", message);
-	if (flag == 1)
-		close(fd);
-	exit(1);
-}
-
-void ft_free(int flag, char **arr, char *message)
-{
-	int i;
-
-	i = 0;
-	while (arr[i] != NULL)
-		free(arr[i++]);
-	free(arr);
-	if (flag != 0)
-		ft_exit_fd(0, message, 0);
 }
