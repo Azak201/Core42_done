@@ -8,9 +8,9 @@ t_map *define_struct(char **map_str)
 	main_map->map = map_str;
 	main_map->col_p = 0;
 	main_map->row_p = 0;
-	main_map->C = 0;
-	main_map->P = 0;
-	main_map->E = 0;
+	main_map->c = 0;
+	main_map->p = 0;
+	main_map->e = 0;
 	main_map->col_num = 0;
 	main_map->row_num = 0;
 	main_map->fmap = NULL;
@@ -32,6 +32,28 @@ void find_p(t_map *map)
 			{
 				map->col_p = j;
 				map->row_p = i;
+				return;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+void find_e(t_map *map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j] != '\0')
+		{
+			if (map->map[i][j] == 'E')
+			{
+				map->col_e = j;
+				map->row_e = i;
 				return;
 			}
 			j++;
@@ -65,7 +87,7 @@ char **create_fmap(t_map **main_map)
 	fmap[i] = NULL;
 	return (fmap);
 }
-int find_C(t_map *map)
+int find_c(t_map *map)
 {
 	int i;
 	int j;

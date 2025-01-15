@@ -4,6 +4,9 @@ static void counter(char mc, int *c, int *p, int *e);
 static void eadges_validating(t_map **tmap);
 static void validate_map_contant(char **map, t_map **main_map);
 
+/*this function check if there empty lines in the map at first
+then it convert the map string called "line" to 2D array and check
+if it rectangeluer and return the 2D array*/
 char **handling_map_shape(char **line)
 {
 	char **tmp;
@@ -16,7 +19,7 @@ char **handling_map_shape(char **line)
 	if (!tmp)
 	{
 		free(*line);
-		ft_exit_fd(0, "Failure in allocation", 0);
+		ft_exit_fd(2, "Failure in allocation", 0);
 	}
 	i = 0;
 	cmp = ft_strlen(tmp[0]);
@@ -33,6 +36,10 @@ char **handling_map_shape(char **line)
 	return (tmp);
 }
 
+/*this func. check for the contant of map thats only "ECP01"
+and create struct map then its check on the eadges thats
+only 1s and create copy of map and apply the flood_fill on it
+then return the struct pointer*/
 t_map *map_validation(char **map)
 {
 	int i;
@@ -43,17 +50,19 @@ t_map *map_validation(char **map)
 	validate_map_contant(map, &main_map);
 	while (main_map->map[i] != NULL)
 		i++;
-	main_map->col_num = ft_strlen(main_map->map[0]);
 	main_map->row_num = i;
+	main_map->col_num = ft_strlen(main_map->map[0]);
 	eadges_validating(&main_map);
 	find_p(&(*main_map));
+	find_e(&(*main_map));
 	main_map->fmap = create_fmap(&main_map);
 	flood_fill(&main_map, main_map->row_p, main_map->col_p);
-	if ((find_C(main_map)) == 1)
+	if ((find_c((main_map)) == 1))
 		ft_free_map_struct(1, &main_map, "C is not reachable");
 	return (main_map);
 }
 
+/*this function check for ECP01 and its numbers */
 static void validate_map_contant(char **map, t_map **main_map)
 {
 	int i;
@@ -67,14 +76,15 @@ static void validate_map_contant(char **map, t_map **main_map)
 		{
 			if (ft_strchr("01EPC", map[i][j]) == NULL)
 				ft_free_map_struct(1, main_map, "map contant not valid");
-			counter(map[i][j], &((*main_map)->C), &((*main_map)->P), &((*main_map)->E));
+			counter(map[i][j], &((*main_map)->c), &((*main_map)->p), &((*main_map)->e));
 			j++;
 		}
 		i++;
 	}
-	if ((*main_map)->C < 1 || (*main_map)->E != 1 || (*main_map)->P != 1)
+	if ((*main_map)->c < 1 || (*main_map)->e != 1 || (*main_map)->p != 1)
 		ft_free_map_struct(1, main_map, "invalid number of E, P or C");
 }
+
 static void counter(char mc, int *c, int *p, int *e)
 {
 	if (mc == 'C')
@@ -84,6 +94,7 @@ static void counter(char mc, int *c, int *p, int *e)
 	if (mc == 'E')
 		*e = *e + 1;
 }
+/*this function check for first and last row/column that they all 1s */
 static void eadges_validating(t_map **tmap)
 {
 	int i;

@@ -1,5 +1,6 @@
 #include <so_long.h>
 
+/*this function apply the flood fill alg. on the map sent to it*/
 void flood_fill(t_map **map, int p_row, int p_col)
 {
 	if (p_row < 0 || p_col < 0 || p_col >= (*map)->col_num || p_row >= (*map)->row_num)

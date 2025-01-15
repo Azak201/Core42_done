@@ -1,4 +1,5 @@
-SRCS =srcs/floodfill.c  srcs/handling2.c  srcs/handling.c  srcs/main.c  srcs/utility.c
+SRCS =srcs/floodfill.c  srcs/handling2.c  srcs/handling.c  srcs/main.c  srcs/utility.c\
+	 srcs/mlx_handler.c srcs/movement.c
 
 OBJ =$(SRCS:srcs/%.c=obj/%.o)
 
