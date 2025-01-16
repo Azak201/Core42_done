@@ -6,14 +6,14 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:38:33 by amismail          #+#    #+#             */
-/*   Updated: 2025/01/15 19:05:14 by amismail         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:08:02 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-static void fail_join(char *tmp, char *tmp2, int fd);
-static char *file_read(int fd);
+static void	fail_join(char *tmp, char *tmp2, int fd);
+static char	*file_read(int fd);
 
 /*void print_maps(t_map *map)
 {
@@ -38,13 +38,13 @@ then read the map from its file and create 2d array from it and check that its
 valid then creat structed map with its atribute and then send it to create_game
 function
 */
-int main(int arc, char **argv)
+int	main(int arc, char **argv)
 {
-	int fd;
-	char *line;
-	char **map;
-	int len;
-	t_map *tmap;
+	int		fd;
+	char	*line;
+	char	**map;
+	int		len;
+	t_map	*tmap;
 
 	if (arc != 2)
 		ft_exit_fd(2, "invalid args number", 0);
@@ -56,20 +56,19 @@ int main(int arc, char **argv)
 	close(fd);
 	map = handling_map_shape(&line);
 	free(line);
-	tmap = map_validation(map);
-	// ft_free_map_struct(0, &tmap, 0);
+	tmap = map_validation(&(*map));
 	create_the_game(&tmap);
 }
 
 /* this function read the map from its file file and check for reading and fd
  errors and joining the map to create one long string represent the whole
  map */
-static char *file_read(int fd)
+static char	*file_read(int fd)
 {
-	int i;
-	char *tmp;
-	char *tmp2;
-	char *line;
+	int		i;
+	char	*tmp;
+	char	*tmp2;
+	char	*line;
 
 	if (fd < 0)
 		ft_exit_fd(2, "failure in opening file", 0);
@@ -94,7 +93,8 @@ static char *file_read(int fd)
 /*this function work only if the file_read have problem in its join between
  the get_next_line and the next one of it , keep reading the file to reach
   EOF so doesn't have the still reachable inner static variable */
-static void fail_join(char *tmp, char *tmp2, int fd)
+
+static void	fail_join(char *tmp, char *tmp2, int fd)
 {
 	if (tmp)
 		free(tmp);
@@ -109,9 +109,9 @@ static void fail_join(char *tmp, char *tmp2, int fd)
 	ft_exit_fd(1, "failure in reading file", fd);
 }
 
-static t_game *define_game(t_map **map)
+static t_game	*define_game(t_map **map)
 {
-	t_game *s;
+	t_game	*s;
 
 	s = (t_game *)malloc(sizeof(t_game));
 	s->tmap = map;
@@ -133,11 +133,11 @@ static t_game *define_game(t_map **map)
 
 /*this is the main function that run the GUI by connecting with X server
 and upload the map and handle the keys to play game and keep it runnig*/
-void create_the_game(t_map **tmap)
+void	create_the_game(t_map **tmap)
 {
-	t_game *s_l;
-	int x;
-	int y;
+	t_game	*s_l;
+	int		x;
+	int		y;
 
 	s_l = define_game(tmap);
 	x = s_l->tmap[0]->col_num * 50;
