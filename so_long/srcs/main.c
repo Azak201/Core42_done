@@ -6,7 +6,7 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:38:33 by amismail          #+#    #+#             */
-/*   Updated: 2025/01/16 15:08:02 by amismail         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:32:04 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ static t_game	*define_game(t_map **map)
 	t_game	*s;
 
 	s = (t_game *)malloc(sizeof(t_game));
+	if (!s)
+		ft_free_map_struct(1, &(*map), "fail in maloc t_game");
 	s->tmap = map;
 	s->mlx_ptr = NULL;
 	s->win_ptr = NULL;
