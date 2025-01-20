@@ -6,7 +6,7 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:43:21 by amismail          #+#    #+#             */
-/*   Updated: 2025/01/16 15:43:25 by amismail         ###   ########.fr       */
+/*   Updated: 2024/12/21 03:34:22 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,35 @@ void	upload_images(t_game *s_l)
 	s_l->p_d = mlx_xpm_file_to_image(s_l->mlx_ptr, "xpm/p_d.xpm", &w, &h);
 	s_l->p_w = mlx_xpm_file_to_image(s_l->mlx_ptr, "xpm/p_w.xpm", &w, &h);
 	if (s_l->g_img == NULL || s_l->w_img == NULL || s_l->c_img == NULL)
-		ft_free_game(1, &s_l, "fail in uploding the image || invalid image");
+		fail_up_img(s_l);
 	if (s_l->p_img == NULL || s_l->op_e_img == NULL || s_l->c_e_img == NULL)
-		ft_free_game(1, &s_l, "fail in uploding the image || invalid image");
+		fail_up_img(s_l);
 	if (s_l->p_w == NULL || s_l->p_a == NULL || s_l->p_d == NULL
 		|| s_l->p_s == NULL)
-		ft_free_game(1, &s_l, "fail in uploding the image || invalid image");
+		fail_up_img(s_l);
 }
 
 /*this funcion close the window and its connection & x connection & exit*/
 int	destroy_win(t_game *s_l)
 {
-	mlx_destroy_image(s_l->mlx_ptr, s_l->g_img);
-	mlx_destroy_image(s_l->mlx_ptr, s_l->w_img);
-	mlx_destroy_image(s_l->mlx_ptr, s_l->p_img);
-	mlx_destroy_image(s_l->mlx_ptr, s_l->c_img);
-	mlx_destroy_image(s_l->mlx_ptr, s_l->p_a);
-	mlx_destroy_image(s_l->mlx_ptr, s_l->p_d);
-	mlx_destroy_image(s_l->mlx_ptr, s_l->p_s);
-	mlx_destroy_image(s_l->mlx_ptr, s_l->p_w);
-	mlx_destroy_image(s_l->mlx_ptr, s_l->c_e_img);
+	if (s_l->g_img)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->g_img);
+	if (s_l->w_img)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->w_img);
+	if (s_l->p_img)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->p_img);
+	if (s_l->c_img)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->c_img);
+	if (s_l->p_a)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->p_a);
+	if (s_l->p_d)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->p_d);
+	if (s_l->p_s)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->p_s);
+	if (s_l->p_w)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->p_w);
+	if (s_l->c_e_img)
+		mlx_destroy_image(s_l->mlx_ptr, s_l->c_e_img);
 	mlx_destroy_image(s_l->mlx_ptr, s_l->op_e_img);
 	mlx_destroy_window(s_l->mlx_ptr, s_l->win_ptr);
 	mlx_destroy_display(s_l->mlx_ptr);

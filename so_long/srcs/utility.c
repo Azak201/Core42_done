@@ -114,7 +114,7 @@ int	find_c(t_map *map)
 		j = 0;
 		while (map->fmap[i][j] != '\0')
 		{
-			if (map->fmap[i][j] == 'C')
+			if (map->fmap[i][j] == 'C' || map->fmap[i][j] == 'E')
 				return (1);
 			j++;
 		}

@@ -70,7 +70,7 @@ t_map	*map_validation(char **map)
 	main_map->fmap = create_fmap(&main_map);
 	flood_fill(&main_map, main_map->row_p, main_map->col_p);
 	if ((find_c((main_map)) == 1))
-		ft_free_map_struct(1, &main_map, "C is not reachable");
+		ft_free_map_struct(1, &main_map, "C OR E is not reachable");
 	return (main_map);
 }
 

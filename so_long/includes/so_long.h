@@ -6,7 +6,7 @@
 /*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:42:32 by amismail          #+#    #+#             */
-/*   Updated: 2025/01/16 17:08:29 by amismail         ###   ########.fr       */
+/*   Updated: 2024/12/21 03:33:28 by amismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	up(t_game *s);
 void	down(t_game *s);
 void	right(t_game *s);
 void	left(t_game *s);
+void	fail_up_img(t_game *s_l);
 #endif
